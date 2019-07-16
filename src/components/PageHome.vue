@@ -10,8 +10,6 @@ import sourceData from '@/data.json'
 import ThreadList from './ThreadList'
 
 export default {
-  name: 'HelloWorld',
-
   components: {
     ThreadList
   },
