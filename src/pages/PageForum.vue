@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import ThreadList from '@/components/ThreadList'
 import sourceData from '@/data'
+import ThreadList from '@/components/ThreadList'
 
 export default {
   components: {
