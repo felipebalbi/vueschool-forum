@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import sourceData from '@/data.json'
+import sourceData from '@/data'
 
 export default {
   props: {

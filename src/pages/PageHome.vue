@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import sourceData from '@/data.json'
+import sourceData from '@/data'
 import ThreadList from '@/components/ThreadList'
 
 export default {
