@@ -16,7 +16,6 @@
 
 
 <script>
-import sourceData from '@/data'
 import PostList from '@/components/PostList'
 import PostEditor from '@/components/PostEditor'
 
@@ -33,22 +32,22 @@ export default {
   },
   data () {
     return {
-      thread: sourceData.threads[this.id]
+      thread: this.$store.state.threads[this.id]
     }
   },
   methods: {
     addPost ({post}) {
       const postId = post['.key']
 
-      this.$set(sourceData.posts, post['.key'], post)
+      this.$set(this.$store.state.posts, post['.key'], post)
       this.$set(this.thread.posts, postId, post['.key'])
-      this.$set(sourceData.users[post.userId].posts, postId, post['.key'])
+      this.$set(this.$store.state.users[post.userId].posts, postId, post['.key'])
     }
   },
   computed: {
     posts () {
       const postIds = Object.values(this.thread.posts)
-      return Object.values(sourceData.posts).filter(post => postIds.includes(post['.key']))
+      return Object.values(this.$store.state.posts).filter(post => postIds.includes(post['.key']))
     }
   }
 }
