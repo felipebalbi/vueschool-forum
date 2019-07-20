@@ -9,7 +9,6 @@
   
   <PostList :posts="posts"/>
   <PostEditor
-    @save="addPost"
     :threadId="id"/>
 </div>
 </template>
@@ -24,26 +23,20 @@ export default {
     PostList,
     PostEditor
   },
+
   props: {
     id: {
       required: true,
       type: String
     }
   },
+
   data () {
     return {
       thread: this.$store.state.threads[this.id]
     }
   },
-  methods: {
-    addPost ({post}) {
-      const postId = post['.key']
 
-      this.$set(this.$store.state.posts, post['.key'], post)
-      this.$set(this.thread.posts, postId, post['.key'])
-      this.$set(this.$store.state.users[post.userId].posts, postId, post['.key'])
-    }
-  },
   computed: {
     posts () {
       const postIds = Object.values(this.thread.posts)
