@@ -1,32 +1,30 @@
 <template>
-<div class="col-full" :class="$style.centered">
-  <h1 :class="$style.headingLarge">Not Found</h1>
-  
-  <p :class="$style.textLarge">
-    Oops, we couldn't find what you are looking for. Why don't you
-    <router-link :to="{name: 'Home'}">
-      go Home instead
-    </router-link>
-  </p>
-</div>
+  <div class="col-full" :class="$style.centered">
+    <h1 :class="$style.headingLarge">Not Found</h1>
+
+    <p :class="$style.textLarge">
+      Oops, we couldn't find what you are looking for. Why don't you
+      <router-link :to="{name: 'Home'}">go Home instead</router-link>
+    </p>
+  </div>
 </template>
 
 <script>
-  export default {}
+export default {}
 </script>
 
 <style module>
-  .headingLarge {
-      font-size: 100px;
-  }
+.headingLarge {
+  font-size: 100px;
+}
 
-  .textLarge {
-      font-size: 50px;
-      font-weight: 100;
-  }
+.textLarge {
+  font-size: 50px;
+  font-weight: 100;
+}
 
-  .centered {
-      text-align: center;
-  }
+.centered {
+  text-align: center;
+}
 </style>
 

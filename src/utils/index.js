@@ -6,6 +6,4 @@ const countObjectProperties = obj => {
   return 0
 }
 
-export {
-  countObjectProperties
-}
+export { countObjectProperties }

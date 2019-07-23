@@ -1,38 +1,35 @@
 <template>
-<div class="flex-grid">
-  
+  <div class="flex-grid">
     <!-- <UserProfileCard -->
     <!--   :user="user" -->
     <!--   :userPostsCount="userPostsCount" -->
     <!--   :userThreadsCount="userThreadsCount" /> -->
 
-  <UserProfileCardEditor
-    :user="user"
-    :userPostsCount="userPostsCount"
-    :userThreadsCount="userThreadsCount" />
+    <UserProfileCardEditor
+      :user="user"
+      :userPostsCount="userPostsCount"
+      :userThreadsCount="userThreadsCount"
+    />
 
-  <div class="col-7 push-top">
-    <div class="profile-header">
-      <span class="text-lead">
-        Joker's recent activity
-      </span>
-      <a href="#">See only started threads?</a>
+    <div class="col-7 push-top">
+      <div class="profile-header">
+        <span class="text-lead">Joker's recent activity</span>
+        <a href="#">See only started threads?</a>
+      </div>
+
+      <hr />
+
+      <PostList :posts="userPosts" />
     </div>
-
-    <hr>
-    
-    <PostList :posts="userPosts" />
-
   </div>
-</div> 
 </template>
 
 <script>
 import PostList from '@/components/PostList'
 import UserProfileCard from '@/components/UserProfileCard'
 import UserProfileCardEditor from '@/components/UserProfileCardEditor'
-import {mapGetters} from 'vuex'
-import {countObjectProperties} from '@/utils'
+import { mapGetters } from 'vuex'
+import { countObjectProperties } from '@/utils'
 
 export default {
   components: {
@@ -48,8 +45,9 @@ export default {
 
     userPosts () {
       if (this.user.posts) {
-        return Object.values(this.$store.state.posts)
-          .filter(post => post.userId === this.user['.key'])
+        return Object.values(this.$store.state.posts).filter(
+          post => post.userId === this.user['.key']
+        )
       }
 
       return []

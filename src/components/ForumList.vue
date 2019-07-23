@@ -1,10 +1,7 @@
 <template>
-<div>
-
-  <ForumListItem v-for="forum in forums"
-		 :forum="forum"
-		 :key="forum['.key']"/>
-</div>
+  <div>
+    <ForumListItem v-for="forum in forums" :forum="forum" :key="forum['.key']" />
+  </div>
 </template>
 
 <script>

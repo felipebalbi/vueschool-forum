@@ -1,22 +1,15 @@
 <template>
-<div>
-  <form @submit.prevent="save">
-    <div class="form-group">
-      <textarea
-	name=""
-	id=""
-	cols="30"
-	row="10"
-	class="form-input"
-	v-model="text">
-      </textarea>
-    </div>
-    
-    <div class="form-actions">
-      <button class="btn-blue">Submit</button>
-    </div>
-  </form>
-</div>
+  <div>
+    <form @submit.prevent="save">
+      <div class="form-group">
+        <textarea name id cols="30" row="10" class="form-input" v-model="text"></textarea>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-blue">Submit</button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>

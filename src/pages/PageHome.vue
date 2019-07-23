@@ -1,10 +1,9 @@
 <template>
-<div class="col-full push-top">
-  <h1>Welcome to the forum</h1>
+  <div class="col-full push-top">
+    <h1>Welcome to the forum</h1>
 
-  <CategoryList :categories="categories" />
-
-</div>
+    <CategoryList :categories="categories" />
+  </div>
 </template>
 
 <script>

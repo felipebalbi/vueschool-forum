@@ -1,13 +1,13 @@
 <template>
-<div class="category-wrapper">
-  <div class="col-full push-top">
-    <h1>{{category.name}}</h1>
-  </div>
+  <div class="category-wrapper">
+    <div class="col-full push-top">
+      <h1>{{category.name}}</h1>
+    </div>
 
-  <div class="col-full">
-    <CategoryListItem :category="category" />
+    <div class="col-full">
+      <CategoryListItem :category="category" />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-  .category-wrapper {
-      width: 100%;
-  }
+.category-wrapper {
+  width: 100%;
+}
 </style>

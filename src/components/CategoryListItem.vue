@@ -1,14 +1,11 @@
 <template>
-<div class="forum-list">
+  <div class="forum-list">
+    <h2 class="list-title">
+      <router-link :to="{name: 'Category', params: {id: category['.key']}}">{{ category.name }}</router-link>
+    </h2>
 
-  <h2 class="list-title">
-    <router-link :to="{name: 'Category', params: {id: category['.key']}}">
-      {{ category.name }}
-    </router-link>
-  </h2>
-
-  <ForumList :forums="categoryForums"/>
-</div>
+    <ForumList :forums="categoryForums" />
+  </div>
 </template>
 
 <script>
@@ -24,8 +21,9 @@ export default {
 
   computed: {
     categoryForums () {
-      return Object.values(this.$store.state.forums)
-        .filter(forum => forum.categoryId === this.category['.key'])
+      return Object.values(this.$store.state.forums).filter(
+        forum => forum.categoryId === this.category['.key']
+      )
     }
   },
 

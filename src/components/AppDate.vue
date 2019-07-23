@@ -1,5 +1,5 @@
 <template>
-<span :title="timestamp | humanFriendlyDate">{{timestamp | diffForHumans}}</span>
+  <span :title="timestamp | humanFriendlyDate">{{timestamp | diffForHumans}}</span>
 </template>
 
 <script>

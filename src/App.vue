@@ -1,10 +1,10 @@
 <template>
-<div id="app">
-  <TheNavbar/>
-  <div class="container">
-    <router-view/>
+  <div id="app">
+    <TheNavbar />
+    <div class="container">
+      <router-view />
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -18,5 +18,5 @@ export default {
 </script>
 
 <style>
-@import "assets/css/style.css";
+@import 'assets/css/style.css';
 </style>
