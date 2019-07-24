@@ -3,9 +3,9 @@
     <h1>
       Editting
       <i>{{thread.title}}</i>
-
-      <ThreadEditor :title="thread.title" :text="text" @save="save" @cancel="cancel" />
     </h1>
+
+    <ThreadEditor :title="thread.title" :text="text" @save="save" @cancel="cancel" />
   </div>
 </template>
 
@@ -45,15 +45,15 @@ export default {
         .then(thread => {
           this.$router.push({
             name: 'ThreadShow',
-            params: { id: thread['.key'] }
+            params: { id: this.id }
           })
         })
     },
 
     cancel () {
       this.$router.push({
-        name: 'Forum',
-        params: { id: this.thread.forumId }
+        name: 'ThreadShow',
+        params: { id: this.id }
       })
     }
   }

@@ -3,9 +3,9 @@
     <h1>
       Create new thread in
       <i>{{forum.name}}</i>
-
-      <ThreadEditor @save="save" @cancel="cancel" />
     </h1>
+
+    <ThreadEditor @save="save" @cancel="cancel" />
   </div>
 </template>
 
