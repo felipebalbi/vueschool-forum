@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import sourceData from '@/data'
+import { Promise } from 'q'
 
 Vue.use(Vuex)
 
@@ -27,6 +28,14 @@ export default new Vuex.Store({
       commit('appendPostToThread', { threadId: post.threadId, postId })
       commit('appendPostToUser', { userId: post.userId, postId })
       return Promise.resolve(state.posts[postId])
+    },
+
+    updatePost ({ commit, state }, { id, text }) {
+      return new Promise((resolve, reject) => {
+        const post = state.posts[id]
+        commit('setPost', { postId: id, post: { ...post, text } })
+        resolve(post)
+      })
     },
 
     createThread ({ state, commit, dispatch }, { text, title, forumId }) {
