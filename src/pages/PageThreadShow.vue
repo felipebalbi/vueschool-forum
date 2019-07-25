@@ -10,7 +10,7 @@
     </h1>
     <p>
       By
-      <a href="#" class="link-unstyled">Robin</a>,
+      <a href="#" class="link-unstyled">{{user.name}}</a>,
       <AppDate :timestamp="thread.publishedAt" />
       <span
         style="float:right; margin-top: 2px;"
@@ -51,6 +51,10 @@ export default {
 
     thread () {
       return this.$store.state.threads[this.id]
+    },
+
+    user () {
+      return this.$store.state.users[this.thread.userId]
     },
 
     contributorsCount () {
