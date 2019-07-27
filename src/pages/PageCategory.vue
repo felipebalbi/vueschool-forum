@@ -1,5 +1,5 @@
 <template>
-  <div class="category-wrapper">
+  <div v-if="category" class="category-wrapper">
     <div class="col-full push-top">
       <h1>{{category.name}}</h1>
     </div>
@@ -29,6 +29,12 @@ export default {
 
   components: {
     CategoryListItem
+  },
+
+  created () {
+    this.$store.dispatch('fetchCategory', { id: this.id }).then(category => {
+      this.$store.dispatch('fetchForums', { ids: category.forums })
+    })
   }
 }
 </script>

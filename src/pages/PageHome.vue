@@ -22,11 +22,9 @@ export default {
 
   beforeCreate () {
     this.$store.dispatch('fetchAllCategories').then(categories => {
-      categories.forEach(category => {
-        this.$store.dispatch('fetchForums', {
-          ids: Object.keys(category.forums)
-        })
-      })
+      categories.forEach(category =>
+        this.$store.dispatch('fetchForums', { ids: category.forums })
+      )
     })
   }
 }
