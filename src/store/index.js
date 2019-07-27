@@ -129,7 +129,12 @@ export default new Vuex.Store({
       return dispatch('fetchItem', { resource: 'posts', id })
     },
 
+    fetchPosts ({ dispatch }, { ids }) {
+      return dispatch('fetchItems', { ids, resource: 'posts' })
+    },
+
     fetchItem ({ state, commit }, { id, resource }) {
+      console.log('fetching', resource, id)
       return new Promise((resolve, reject) => {
         firebase
           .database()
@@ -145,6 +150,10 @@ export default new Vuex.Store({
             resolve(state[resource][id])
           })
       })
+    },
+
+    fetchItems ({ dispatch }, { ids, resource }) {
+      return Promise.all(ids.map(id => dispatch('fetchItem', { id, resource })))
     }
   },
 
