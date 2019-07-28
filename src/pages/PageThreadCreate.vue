@@ -11,6 +11,7 @@
 
 <script>
 import ThreadEditor from '@/components/ThreadEditor.vue'
+import { mapActions } from 'vuex'
 
 export default {
   components: {
@@ -31,19 +32,19 @@ export default {
   },
 
   methods: {
+    ...mapActions(['fetchForum', 'createThread']),
+
     save ({ title, text }) {
-      this.$store
-        .dispatch('createThread', {
-          forumId: this.forum['.key'],
-          title,
-          text
+      this.createThread({
+        forumId: this.forum['.key'],
+        title,
+        text
+      }).then(thread => {
+        this.$router.push({
+          name: 'ThreadShow',
+          params: { id: thread['.key'] }
         })
-        .then(thread => {
-          this.$router.push({
-            name: 'ThreadShow',
-            params: { id: thread['.key'] }
-          })
-        })
+      })
     },
 
     cancel () {
@@ -52,7 +53,7 @@ export default {
   },
 
   created () {
-    this.$store.dispatch('fetchForum', { id: this.forumId })
+    this.fetchForum({ id: this.forumId })
   }
 }
 </script>

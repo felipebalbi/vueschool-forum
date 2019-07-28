@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import CategoryListItem from '@/components/CategoryListItem'
 
 export default {
@@ -31,9 +32,13 @@ export default {
     CategoryListItem
   },
 
+  methods: {
+    ...mapActions(['fetchCategory', 'fetchForums'])
+  },
+
   created () {
-    this.$store.dispatch('fetchCategory', { id: this.id }).then(category => {
-      this.$store.dispatch('fetchForums', { ids: category.forums })
+    this.fetchCategory({ id: this.id }).then(category => {
+      this.fetchForums({ ids: category.forums })
     })
   }
 }
