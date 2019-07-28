@@ -74,11 +74,9 @@ export default {
   created () {
     this.fetchThread({ id: this.id }).then(thread => {
       this.fetchUser({ id: thread.userId })
-      this.fetchPosts({ ids: Object.keys(thread.posts) }).then(posts => {
-        posts.forEach(post => {
-          this.fetchUser({ id: post.userId })
-        })
-      })
+      this.fetchPosts({ ids: thread.posts }).then(posts =>
+        posts.forEach(post => this.fetchUser({ id: post.userId }))
+      )
     })
   }
 }

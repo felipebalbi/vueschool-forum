@@ -171,9 +171,8 @@ export default new Vuex.Store({
                 id: categoryId,
                 item: category
               })
-
-              resolve(Object.values(state.categories))
             })
+            resolve(Object.values(state.categories))
           })
       })
     },
