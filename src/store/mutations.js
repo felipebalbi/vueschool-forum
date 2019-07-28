@@ -29,6 +29,11 @@ export default {
     Vue.set(state[resource], id, item)
   },
 
+  appendContributorToThread: makeAppendChildToParentMutation({
+    parent: 'threads',
+    child: 'contributors'
+  }),
+
   appendPostToThread: makeAppendChildToParentMutation({
     parent: 'threads',
     child: 'posts'
