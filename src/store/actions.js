@@ -229,7 +229,7 @@ export default {
             resource
           })
 
-          setTimeout(() => resolve(state[resource][id]), 1000)
+          resolve(state[resource][id])
         })
     })
   },
