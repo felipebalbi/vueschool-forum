@@ -36,6 +36,35 @@ export default {
       })
   },
 
+  createUser ({ commit, state }, { email, name, username, avatar = null }) {
+    return new Promise((resolve, reject) => {
+      const registeredAt = Math.floor(Date.now() / 1000)
+      const usernameLower = username.toLowerCase()
+      email = email.toLowerCase()
+      const user = {
+        email,
+        name,
+        username,
+        avatar,
+        registeredAt,
+        usernameLower
+      }
+      const userId = firebase
+        .database()
+        .ref('users')
+        .push().key
+      firebase
+        .database()
+        .ref('users')
+        .child(userId)
+        .set(user)
+        .then(() => {
+          commit('setItem', { id: userId, item: user, resource: 'users' })
+          resolve(state.users[userId])
+        })
+    })
+  },
+
   updatePost ({ commit, state }, { id, text }) {
     return new Promise((resolve, reject) => {
       const post = state.posts[id]
