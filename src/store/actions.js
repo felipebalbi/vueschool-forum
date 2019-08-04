@@ -36,7 +36,7 @@ export default {
       })
   },
 
-  createUser ({ commit, state }, { email, name, username, avatar = null }) {
+  createUser ({ commit, state }, { id, email, name, username, avatar = null }) {
     return new Promise((resolve, reject) => {
       const registeredAt = Math.floor(Date.now() / 1000)
       const usernameLower = username.toLowerCase()
@@ -49,20 +49,35 @@ export default {
         registeredAt,
         usernameLower
       }
-      const userId = firebase
-        .database()
-        .ref('users')
-        .push().key
       firebase
         .database()
         .ref('users')
-        .child(userId)
+        .child(id)
         .set(user)
         .then(() => {
-          commit('setItem', { id: userId, item: user, resource: 'users' })
-          resolve(state.users[userId])
+          commit('setItem', { id: id, item: user, resource: 'users' })
+          resolve(state.users[id])
         })
     })
+  },
+
+  registerUserWithEmailAndPassword (
+    { dispatch },
+    { name, username, password, email, avatar = null }
+  ) {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => {
+        return dispatch('createUser', {
+          id: credential.user.uid,
+          name,
+          username,
+          password,
+          email,
+          avatar
+        })
+      })
   },
 
   updatePost ({ commit, state }, { id, text }) {
