@@ -80,6 +80,19 @@ export default {
       })
   },
 
+  signInWithEmailAndPassword (context, { email, password }) {
+    return firebase.auth().signInWithEmailAndPassword(email, password)
+  },
+
+  signOut ({ commit }) {
+    return firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        commit('setAuthId', null)
+      })
+  },
+
   updatePost ({ commit, state }, { id, text }) {
     return new Promise((resolve, reject) => {
       const post = state.posts[id]
