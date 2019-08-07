@@ -40,7 +40,7 @@
       </ul>
       <ul v-else>
         <li class="navbar-item">
-          <router-link :to="{name: 'Signin'}">Sign In</router-link>
+          <router-link :to="{name: 'SignIn'}">Sign In</router-link>
         </li>
         <li class="navbar-item">
           <router-link :to="{name: 'Register'}">Register</router-link>
