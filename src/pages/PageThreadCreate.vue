@@ -5,7 +5,7 @@
       <i>{{forum.name}}</i>
     </h1>
 
-    <ThreadEditor @save="save" @cancel="cancel" />
+    <ThreadEditor ref="editor" @save="save" @cancel="cancel" />
   </div>
 </template>
 
@@ -28,9 +28,22 @@ export default {
     }
   },
 
+  data () {
+    return {
+      saved: false
+    }
+  },
+
   computed: {
     forum () {
       return this.$store.state.forums[this.forumId]
+    },
+
+    hasUnsavedChanges () {
+      return (
+        !this.saved &&
+        (this.$refs.editor.form.title || this.$refs.editor.form.text)
+      )
     }
   },
 
@@ -43,6 +56,7 @@ export default {
         title,
         text
       }).then(thread => {
+        this.saved = true
         this.$router.push({
           name: 'ThreadShow',
           params: { id: thread['.key'] }
@@ -59,6 +73,22 @@ export default {
     this.fetchForum({ id: this.forumId }).then(() =>
       this.asyncDataStatus_fetched()
     )
+  },
+
+  beforeRouteLeave (to, from, next) {
+    if (this.hasUnsavedChanges) {
+      const confirmed = window.confirm(
+        'Are you sure you want to leave? Unsaved changes will be lost.'
+      )
+
+      if (confirmed) {
+        next()
+      } else {
+        next(false)
+      }
+    } else {
+      next()
+    }
   }
 }
 </script>
