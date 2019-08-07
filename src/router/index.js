@@ -55,7 +55,7 @@ const router = new Router({
       path: '/me',
       name: 'Profile',
       component: Profile,
-      props: true,
+      props: { edit: false },
       meta: { requiresAuth: true }
     },
     {
@@ -93,15 +93,17 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   console.log(`${from.name} ☞ ${to.name}`)
 
-  if (to.matched.some(route => route.meta.requiresAuth)) {
-    if (store.state.authId) {
-      next()
+  store.dispatch('initAuthentication').then(user => {
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+      if (user) {
+        next()
+      } else {
+        next({ name: 'Home' })
+      }
     } else {
-      next({ name: 'Home' })
+      next()
     }
-  } else {
-    next()
-  }
+  })
 })
 
 export default router

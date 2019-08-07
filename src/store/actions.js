@@ -152,6 +152,25 @@ export default {
     })
   },
 
+  initAuthentication ({ dispatch, commit, state }) {
+    return new Promise((resolve, reject) => {
+      if (state.unsubscribeAuthObserver) {
+        state.unsubscribeAuthObserver()
+      }
+
+      const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        console.log('👤 User has changed')
+        if (user) {
+          dispatch('fetchAuthUser').then(dbUser => resolve(dbUser))
+        } else {
+          resolve(null)
+        }
+      })
+
+      commit('setUnsubscribeAuthObserver', unsubscribe)
+    })
+  },
+
   createThread ({ state, commit, dispatch }, { text, title, forumId }) {
     return new Promise((resolve, reject) => {
       const threadId = firebase
