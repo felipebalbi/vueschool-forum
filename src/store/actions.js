@@ -206,6 +206,14 @@ export default {
     })
   },
 
+  fetchAuthUser ({ commit, dispatch }) {
+    const userId = firebase.auth().currentUser.uid
+
+    return dispatch('fetchUser', { id: userId }).then(() => {
+      commit('setAuthId', userId)
+    })
+  },
+
   updateUser: ({ commit }, user) =>
     commit('setUser', { userId: user['.key'], user }),
 
