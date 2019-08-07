@@ -14,7 +14,7 @@ import store from '@/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -56,13 +56,7 @@ export default new Router({
       name: 'Profile',
       component: Profile,
       props: true,
-      beforeEnter (to, from, next) {
-        if (store.state.authId) {
-          next()
-        } else {
-          next({ name: 'Home' })
-        }
-      }
+      meta: { requiresAuth: true }
     },
     {
       path: '/me/edit',
@@ -95,3 +89,19 @@ export default new Router({
   ],
   mode: 'history'
 })
+
+router.beforeEach((to, from, next) => {
+  console.log(`${from.name} ☞ ${to.name}`)
+
+  if (to.matched.some(route => route.meta.requiresAuth)) {
+    if (store.state.authId) {
+      next()
+    } else {
+      next({ name: 'Home' })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
