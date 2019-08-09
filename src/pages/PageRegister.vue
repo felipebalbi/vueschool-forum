@@ -66,7 +66,12 @@ export default {
     registerWithGoogle () {
       this.$store
         .dispatch('signInWithGoogle')
-        .then(() => this.$router.push('/'))
+        .then(() => this.successRedirect())
+    },
+
+    successRedirect () {
+      const redirectTo = this.$route.query.redirectTo || { name: 'Home' }
+      this.$router.push(redirectTo)
     }
   },
 
