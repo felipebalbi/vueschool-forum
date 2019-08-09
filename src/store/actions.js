@@ -1,5 +1,6 @@
 import firebase from 'firebase'
 import { Promise } from 'q'
+import { removeEmptyProperties } from '@/utils'
 
 export default {
   createPost ({ commit, state }, post) {
@@ -289,8 +290,29 @@ export default {
     })
   },
 
-  updateUser: ({ commit }, user) =>
-    commit('setUser', { userId: user['.key'], user }),
+  updateUser ({ commit }, user) {
+    const updates = {
+      avatar: user.avatar,
+      username: user.username,
+      name: user.name,
+      bio: user.bio,
+      website: user.website,
+      email: user.email,
+      location: user.location
+    }
+
+    return new Promise((resolve, reject) => {
+      firebase
+        .database()
+        .ref('users')
+        .child(user['.key'])
+        .update(removeEmptyProperties(updates))
+        .then(() => {
+          commit('setUser', { userId: user['.key'], user })
+          resolve(user)
+        })
+    })
+  },
 
   fetchCategory: ({ dispatch }, { id }) =>
     dispatch('fetchItem', { resource: 'categories', id }),

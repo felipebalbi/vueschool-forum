@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import asyncDataStatus from '@/mixins/asyncDataStatus'
+
 export default {
   props: {
     user: {
@@ -78,6 +80,8 @@ export default {
       type: Object
     }
   },
+
+  mixins: [asyncDataStatus],
 
   computed: {
     userPostsCount () {
@@ -104,6 +108,14 @@ export default {
     cancel () {
       this.$router.push({ name: 'Profile' })
     }
+  },
+
+  created () {
+    this.asyncDataStatus_fetched()
+
+    // this.$store
+    //   .dispatch('fetchPosts', { ids: this.user.posts })
+    //   .then(() => this.asyncDataStatus_fetched())
   }
 }
 </script>
