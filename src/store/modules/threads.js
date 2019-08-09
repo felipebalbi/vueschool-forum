@@ -107,7 +107,7 @@ export default {
     updateThread ({ state, commit, rootState }, { title, text, id }) {
       return new Promise((resolve, reject) => {
         const thread = state.items[id]
-        const post = state.posts[thread.firstPostId]
+        const post = rootState.posts.items[thread.firstPostId]
 
         const edited = {
           at: Math.floor(Date.now() / 1000),
@@ -150,7 +150,7 @@ export default {
   },
   getters: {
     threadRepliesCount: state => id =>
-      countObjectProperties(state.threads.items[id].posts) - 1
+      countObjectProperties(state.items[id].posts) - 1
   },
   mutations: {
     setThread (state, { thread, threadId }) {

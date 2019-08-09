@@ -57,7 +57,7 @@ export default {
 
     updatePost ({ commit, state, rootState }, { id, text }) {
       return new Promise((resolve, reject) => {
-        const post = state.posts[id]
+        const post = state.items[id]
         const edited = {
           at: Math.floor(Date.now() / 1000),
           by: rootState.auth.authId

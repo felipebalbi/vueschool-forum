@@ -11,19 +11,20 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(
-          credential => {
-            return dispatch('users/createUser', {
+        .then(credential => {
+          return dispatch(
+            'users/createUser',
+            {
               id: credential.user.uid,
               name,
               username,
               password,
               email,
               avatar
-            })
-          },
-          { root: true }
-        )
+            },
+            { root: true }
+          )
+        })
         .then(() => {
           return dispatch('fetchAuthUser')
         })

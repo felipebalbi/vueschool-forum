@@ -16,7 +16,7 @@ export default {
             resource
           })
 
-          resolve(state[resource][id])
+          resolve(state[resource].items[id])
         })
     })
   },
