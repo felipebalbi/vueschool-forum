@@ -6,7 +6,9 @@ import App from './App'
 import router from './router'
 import AppDate from '@/components/AppDate'
 import store from '@/store'
+import Vuelidate from 'vuelidate'
 
+Vue.use(Vuelidate)
 Vue.component('AppDate', AppDate)
 Vue.config.productionTip = false
 
