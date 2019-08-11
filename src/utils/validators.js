@@ -35,6 +35,23 @@ export const uniqueEmail = value => {
   })
 }
 
+export const existsEmail = value => {
+  if (!vuelidateHelpers.req(value)) {
+    return true
+  }
+
+  return new Promise((resolve, reject) => {
+    firebase
+      .database()
+      .ref('users')
+      .orderByChild('email')
+      .equalTo(value.toLowerCase())
+      .once('value', snapshot => {
+        resolve(snapshot.exists())
+      })
+  })
+}
+
 export const supportedImageFile = value => {
   if (!vuelidateHelpers.req(value)) {
     return true
