@@ -14,7 +14,7 @@
     <!-- use .navbar-open to open nav -->
     <nav class="navbar">
       <ul v-if="user">
-        <li class="navbar-user">
+        <li class="navbar-user" v-click-outside="closeUserDropDown">
           <a @click.prevent="userDropDownOpen = !userDropDownOpen">
             <img class="avatar-small" :src="user.avatar" alt />
             <span>
@@ -52,18 +52,29 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import clickOutside from '@/directives/click-outside'
 
 export default {
   data () {
     return {
-      userDropDownOpen: false
+      userDropDownOpen: true
     }
+  },
+
+  directives: {
+    clickOutside
   },
 
   computed: {
     ...mapGetters({
       user: 'auth/authUser'
     })
+  },
+
+  methods: {
+    closeUserDropDown () {
+      this.userDropDownOpen = false
+    }
   }
 }
 </script>
